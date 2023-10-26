@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import
+url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap');
+:root {
+  --speed: 300ms;
+}
+* {
+   user-select: none;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.fade-out {
+  visibility: hidden;
+  display: flex;
+  position: static;
+  flex-direction: column;
+  align-self: center;
+  align-content: center;
+  opacity: 0;
+  transform: translateY(0px);
+}
+.fade-in {
+  display: flex;
+  position: static;
+  flex-direction: column;
+  align-self: center;
+  align-content: center;
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0px);
+  transition: 1600ms ease;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+#noshad:focus {
+  box-shadow: none;
+}

@@ -1,0 +1,40 @@
+.loadingPara1 {
+   visibility: hidden;
+   display: flex;
+   position: static;
+   flex-direction: column;
+   align-self: center;
+   align-content: center;
+   opacity: 0;
+   transform: translateY(20px);
+}
+.para1 {
+   display: flex;
+   position: static;
+   flex-direction: column;
+   visibility: visible;
+   opacity: 0.99;
+   transform: translateY(0px);
+   transition: 1600ms ease;
+}
+.loadingPara2 {
+   visibility: hidden;
+   display: flex;
+   position: static;
+   flex-direction: column;
+   opacity: 0;
+   transform: translateY(50px);
+}
+.para2 {
+   display: flex;
+   position: static;
+   visibility: visible;
+   flex-direction: column;
+   opacity: 1;
+   transform: translateY(0px);
+   transition: 1600ms ease;
+}
+
+.maintitle {
+   font-family: "Rubik Mono One";
+}
