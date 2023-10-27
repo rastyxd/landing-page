@@ -1,9 +1,7 @@
-import { Card, Button, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { Box } from "@mui/system";
 import { motion } from "framer-motion";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 
 const Login = ({ bg }) => {
   const [isValidUser, setIsValidUser] = useState(true);
@@ -33,6 +31,16 @@ const Login = ({ bg }) => {
         className="h-screen sm:pt-16 sm:pb-32 text-3xl h-max
       justify-center m-auto w-9/12 sm:min-h-fit sm:w-1/2">
         <motion.div
+          variants={{
+            exit: {
+              opacity: 0,
+              y: 15,
+              transition: {
+                duration: 0.2,
+                delay:0.3
+              }
+            }
+          }}
           initial={{
             opacity: 0,
             y: 10
@@ -41,10 +49,11 @@ const Login = ({ bg }) => {
             opacity: 1,
             y: 0
           }}
+          exit="exit"
           transition={{
-            duration: 0.75,
+            duration: 0.7,
             ease: "easeOut",
-            delay: 0.6
+            delay: 0.4
           }}
           className="h-full">
           <Box className="pb-10">
@@ -60,15 +69,25 @@ const Login = ({ bg }) => {
               }}
               transition={{
                 type: "tween",
-                duration: 1.6,
+                duration: 1.2,
                 ease: "easeOut",
-                delay: 1.5
+                delay: 1.3
               }}
               className="text-3xl text-white text-center
                 pt-10 maintitle">
               S I G N&nbsp; I N
             </motion.div>
             <motion.div
+              variants={{
+                exit: {
+                  width: 0,
+                  transition: {
+                    duration: 0.3,
+                    ease: "anticipate"
+                  }
+                }
+              }}
+              exit="exit"
               initial={{
                 y: 50,
                 opacity: 0,
@@ -78,13 +97,12 @@ const Login = ({ bg }) => {
                 y: [30, 0, 0, 0, 0],
                 h: [0, 10, 10, 0],
                 backgroundColor: "hsl(240, 3.7%, 15.9%)",
-                opacity: [1, 1, 1, 1, 0],
-                width: ["0.5%", "0%", "100%", "100%", "100%"]
+                opacity: [0, 1, 1, 1, 1],
+                width: ["0.5%", "80%", "80%", "80%"]
               }}
               transition={{
-                duration: 4,
-                ease: ["anticipate", "anticipate", "linear"],
-                times: [0, 0.1, 0.2, 0.9, 1],
+                duration: 3.3,
+                ease: ["anticipate", "anticipate"],
                 delay: 0.5
               }}
               id="line"

@@ -4,19 +4,8 @@ import Account from "../Account/Account";
 import SignUpPage from "../Account/SignUpPage";
 import LoginPage from "../Account/LoginPage";
 import NotFound from "../NotFound/NotFound";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-    secondary: {
-      main: "#c3c3c3"
-    }
-  }
-});
 
 const Anim = ({ bg }) => {
   const loc = useLocation();

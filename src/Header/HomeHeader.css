@@ -116,8 +116,29 @@ a:active {
   align-self: center;
   align-content: center;
   opacity: 0;
-  transform: translateX(-100px);
+  animation-name: slin;
+  
+  animation-duration: 300ms;
 }
+@keyframes slin {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(100px);
+  }
+}
+@keyframes slout {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
 .slide-in {
   display: flex;
   position: static;
@@ -126,6 +147,7 @@ a:active {
   align-content: center;
   visibility: visible;
   opacity: 0.99;
-  transform: translateX(0px);
-  transition: 600ms ease;
+  animation-name: slout;
+  animation-duration: 600ms;
+  transform-style: ease-out;
 }

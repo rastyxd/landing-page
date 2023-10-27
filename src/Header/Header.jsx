@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { AppBar } from "@mui/material/";
+import { AppBar, Button } from "@mui/material";
 import { Cross } from "hamburger-react";
 import NavItems from "./NavItems";
 import NavItemsDesk from "./NavItemsDesk";
@@ -9,7 +9,10 @@ import { motion, useAnimationControls } from "framer-motion";
 import "./HomeHeader.css";
 import "../Home/Home.css";
 
-const Header = ({ hbg, lg, setLg }) => {
+const Header = ({ hbg }) => {
+  const [open, setOpen] = useState(false);
+  const [lg, setLg] = useState(false);
+  const nav = useNavigate();
   const backcont = useAnimationControls();
   const loc = useLocation();
   useEffect(() => {
@@ -18,7 +21,7 @@ const Header = ({ hbg, lg, setLg }) => {
     } else {
       backcont.start("hid");
     }
-  }, [lg]);
+  }, [lg, backcont]);
   useEffect(() => {
     if (loc.pathname === "/account/register" || loc.pathname === "/account/login") {
       setLg(true);
@@ -29,7 +32,6 @@ const Header = ({ hbg, lg, setLg }) => {
     }
     console.log(loc.pathname);
   }, [loc.pathname]);
-  const [open, setOpen] = useState(false);
   return (
     <header>
       <NavItemsDesk />
@@ -41,9 +43,11 @@ const Header = ({ hbg, lg, setLg }) => {
           color="transparent"
           position="sticky"
           elevation={24}>
-          <div className="flex pr-4 pt-2 justify-between">
+          <div className="flex mt-2 pr-4 justify-between">
             <motion.div
-              className="ml-6 mt-2.5"
+              onClick={() => {
+                if (lg) nav(-1);
+              }}
               variants={{
                 init: {
                   opacity: 0,
@@ -51,34 +55,72 @@ const Header = ({ hbg, lg, setLg }) => {
                 },
                 vis: {
                   opacity: 1,
-                  x: 0
+                  x: 0,
+                  transition: {
+                    duration: 0.5,
+                    delay: 0.25
+                  }
                 },
                 hid: {
                   opacity: 0,
+                  x: -10,
                   transition: {
-                    duration: 0.2
+                    duration: 0.5,
+                    delay: 0.18
                   }
                 }
               }}
               initial="init"
               animate={backcont}
-              transition={{
-                duration: 0.4,
-                delay: 1
-              }}>
-              <ArrowBackIosNewRounded />
+              exit="exit">
+              <Button
+                sx={{
+                  pt: 1.5,
+                  m: 0.3,
+                  borderRadius: 8
+                }}
+                color="secondary">
+                <ArrowBackIosNewRounded />
+              </Button>
             </motion.div>
-            <Cross
-              size={25}
-              duration={0.5}
-              hideOutline={true}
-              direction="right"
-              toggled={open}
-              toggle={setOpen}
-              onToggle={() => {
-                setOpen(!open);
+            <motion.div
+              variants={{
+                init: {
+                  opacity: 0,
+                  x: 10
+                },
+                vis: {
+                  opacity: 1,
+                  x: 0,
+                  transition: {
+                    duration: 0.5,
+                    delay: 0.25
+                  }
+                }
               }}
-            />
+              initial="init"
+              animate="vis"
+              exit="exit">
+              <Cross
+                size={25}
+                duration={0.5}
+                hideOutline={true}
+                direction="left"
+                toggled={open}
+                toggle={setOpen}
+                onToggle={() => {
+                  if (!open || lg) {
+                    setLg(false);
+                    setOpen(!open);
+                  } else {
+                    setOpen(!open);
+                    if (loc.pathname === "/account/register" || loc.pathname === "/account/login") {
+                      setLg(true);
+                    }
+                  }
+                }}
+              />
+            </motion.div>
           </div>
           <div id="menu" className={`${open ? "active" : "inactive"}`}>
             <NavItems setOpen={setOpen} open={open} hbg={hbg} />

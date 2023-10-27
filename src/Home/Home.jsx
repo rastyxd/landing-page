@@ -20,7 +20,7 @@ const Home = ({ page, bg }) => {
     <motion.div
       className={`${bg} w-full h-screen`}>
       <div className={`${loadTitle ? "title" : "loading"}`}>
-        <div className="maintitle text-xl px-10
+        <div className="maintitle text-xl
           pt-20 text-center w-screen sm:text-left sm:px-20
           sm:w-2/3 sm:text-5xl">
           Imagine a place...

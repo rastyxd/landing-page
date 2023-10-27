@@ -1,10 +1,9 @@
 import { Button } from "@mui/material";
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 const Logo = ({ txt }) => {
   const t = txt;
-  const [i, setI] = useState(0.8);
-  const tarr = t.split("");
+  const [i, setI] = useState(0.7);
   const [newTarr, setNewTarr] = useState([]);
   const [c, setC] = useState(0);
   useEffect(() => {
@@ -27,36 +26,15 @@ const Logo = ({ txt }) => {
           {t[c]}
         </motion.span>
       );
-      setI(() => {
-        return i + 0.05;
-      });
+      setI(i + 0.05);
       setNewTarr([...newTarr, spEl]);
-      setC(() => {
-        return c + 1;
-      });
+      setC(c + 1);
     }
   }, [c]);
   return (
     <>
-      <motion.div
-        className="maintitle pt-3 text-4xl"
-        initial={{
-          opacity: 0,
-          y: 10
-        }}
-        animate={{
-          opacity: 1,
-          y: 0
-        }}
-        transition={{
-          duration: 1,
-          ease: "easeOut",
-          delay: 0.4
-        }}>
-        ACCOUNT
-      </motion.div>
-      <div className="py-10 text-lg">
-        <motion.span className="font-mono">{newTarr.map(tarr => tarr)}</motion.span>
+      <div className="py-10 text-xl">
+        <motion.span className="maintitle">{newTarr.map(tarr => tarr)}</motion.span>
       </div>
     </>
   );
