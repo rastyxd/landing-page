@@ -14,11 +14,14 @@ const Header = ({ hbg }) => {
   const [lg, setLg] = useState(false);
   const nav = useNavigate();
   const backcont = useAnimationControls();
+  const mencont = useAnimationControls();
   const loc = useLocation();
   useEffect(() => {
     if (lg) {
+      mencont.start("hid");
       backcont.start("vis");
     } else {
+      mencont.start("vis");
       backcont.start("hid");
     }
   }, [lg, backcont]);
@@ -66,7 +69,7 @@ const Header = ({ hbg }) => {
                   x: -10,
                   transition: {
                     duration: 0.5,
-                    delay: 0.18
+                    delay: 0
                   }
                 }
               }}
@@ -74,6 +77,7 @@ const Header = ({ hbg }) => {
               animate={backcont}
               exit="exit">
               <Button
+                disableRipple
                 sx={{
                   pt: 1.5,
                   m: 0.3,
@@ -87,39 +91,51 @@ const Header = ({ hbg }) => {
               variants={{
                 init: {
                   opacity: 0,
-                  x: 10
+                  x:10,
+                  display: "visible"
                 },
                 vis: {
                   opacity: 1,
                   x: 0,
+                  display: "inlne-block",
                   transition: {
                     duration: 0.5,
-                    delay: 0.25
+                    delay: 0
                   }
                 }
               }}
               initial="init"
-              animate="vis"
-              exit="exit">
-              <Cross
-                size={25}
-                duration={0.5}
-                hideOutline={true}
-                direction="left"
-                toggled={open}
-                toggle={setOpen}
-                onToggle={() => {
-                  if (!open || lg) {
-                    setLg(false);
-                    setOpen(!open);
-                  } else {
-                    setOpen(!open);
-                    if (loc.pathname === "/account/register" || loc.pathname === "/account/login") {
-                      setLg(true);
-                    }
-                  }
+              animate={mencont}>
+              <Button
+                sx={{
+                  m: 0,
+                  p: 0
                 }}
-              />
+                disableRipple
+                color="secondary">
+                <Cross
+                  size={25}
+                  duration={0.5}
+                  hideOutline={true}
+                  direction="left"
+                  toggled={open}
+                  toggle={setOpen}
+                  onToggle={() => {
+                    if (!open || lg) {
+                      setLg(false);
+                      setOpen(!open);
+                    } else {
+                      setOpen(!open);
+                      if (
+                        loc.pathname === "/account/register" ||
+                        loc.pathname === "/account/login"
+                      ) {
+                        setLg(true);
+                      }
+                    }
+                  }}
+                />{" "}
+              </Button>
             </motion.div>
           </div>
           <div id="menu" className={`${open ? "active" : "inactive"}`}>
